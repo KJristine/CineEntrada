@@ -6,6 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import PaymentForm from './PaymentForm';
 
+const API_URL = import.meta.env.VITE_API_URL;
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const seatLayout = [
@@ -33,7 +34,10 @@ const CustomDatePicker = ({ value, onChange, min }) => {
   const selected = value ? new Date(value) : today;
 
   const handleSelect = (date) => {
-    onChange(date.toISOString().split('T')[0]);
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    onChange(`${yyyy}-${mm}-${dd}`);
     setIsOpen(false);
   };
 
@@ -157,7 +161,7 @@ const BookingModal = ({
 
   const [movies, setMovies] = useState([]);
   useEffect(() => {
-    fetch('/api/movies/active')
+    fetch(`${API_URL}/api/movies/active`)
       .then(res => res.json())
       .then(setMovies);
   }, []);
