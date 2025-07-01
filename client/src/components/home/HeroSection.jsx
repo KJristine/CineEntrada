@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import TrailerModal from '../movies/TrailerModal'
 import EmptyHero from './EmptyHero'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const HeroSection = () => {
   const [movies, setMovies] = useState([])
   const [currentMovie, setCurrentMovie] = useState(0)
@@ -12,7 +14,7 @@ const HeroSection = () => {
 
   // Fetch only active/scheduled-and-now-live movies for users
   useEffect(() => {
-    fetch('/api/movies/active')
+    fetch(`${API_URL}/api/movies/active`)
       .then(res => res.json())
       .then(data => setMovies(data))
   }, [])

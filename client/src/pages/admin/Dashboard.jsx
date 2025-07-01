@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Film, Users, Ticket, DollarSign, ChevronRight } from 'lucide-react'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const statCards = [
   {
     label: 'Total Bookings',
@@ -46,9 +48,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const bookingsRes = await fetch('/api/bookings')
+        const bookingsRes = await fetch(`${API_URL}/api/bookings`)
         const bookings = await bookingsRes.json()
-        const moviesRes = await fetch('/api/movies')
+        const moviesRes = await fetch(`${API_URL}/api/movies`)
         const moviesData = await moviesRes.json()
         // Only count as active if isActive && (no scheduledAt or scheduledAt <= now)
         const now = new Date()
@@ -60,7 +62,7 @@ const Dashboard = () => {
         setMovies(trulyActiveMovies)
         let usersCount = 0
         try {
-          const usersRes = await fetch('/api/users/count')
+          const usersRes = await fetch(`${API_URL}/api/users/count`)
           const usersData = await usersRes.json()
           usersCount = usersData.count || 0
         } catch {

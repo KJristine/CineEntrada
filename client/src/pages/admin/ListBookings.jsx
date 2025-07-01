@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Calendar, Clock, User, MapPin, CreditCard } from 'lucide-react'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const statusColors = {
   confirmed: 'bg-gradient-to-r from-green-500 to-green-700 text-white border-green-400 shadow-green-500/30',
   pending: 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-yellow-900 border-yellow-400 shadow-yellow-400/30',
@@ -14,7 +16,7 @@ const ListBookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await fetch('/api/bookings')
+        const res = await fetch(`${API_URL}/api/bookings`)
         const data = await res.json()
         setBookings(Array.isArray(data) ? data : [])
       } catch {

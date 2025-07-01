@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PlusCircle, Loader2, Film, Calendar, Clock, Award, Star, Youtube, Image, X, Plus, ChevronDown, CheckCircle, Image as ImageIcon } from 'lucide-react'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const initialState = {
   title: '',
   description: '',
@@ -176,7 +178,7 @@ const AddMovies = () => {
   useEffect(() => {
     if (id) {
       setLoading(true)
-      fetch(`/api/movies/${id}`)
+      fetch(`${API_URL}/api/movies/${id}`)
         .then(res => res.json())
         .then(data => setForm(data))
         .catch(() => setError('Failed to load movie.'))
@@ -272,7 +274,7 @@ const AddMovies = () => {
         ...form,
         showtimes: prepareShowtimes(form.showtimes)
       }
-      const res = await fetch(id ? `/api/movies/${id}` : '/api/movies', {
+      const res = await fetch(id ? `${API_URL}/api/movies/${id}` : `${API_URL}/api/movies`, {
         method: id ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -291,7 +293,7 @@ const AddMovies = () => {
   const handleStatusConfirm = async () => {
     setLoading(true)
     try {
-      await fetch(`/api/movies/${pendingMovieId}/status`, {
+      await fetch(`${API_URL}/api/movies/${pendingMovieId}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

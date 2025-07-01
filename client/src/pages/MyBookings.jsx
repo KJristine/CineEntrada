@@ -5,8 +5,10 @@ import { theatersData } from '../data/theatersData'
 import Barcode from 'react-barcode'
 import '../index.css' // Import global styles including animation
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const fetchBookings = async () => {
-  const res = await fetch('/api/bookings')
+  const res = await fetch(`${API_URL}/api/bookings`)
   return res.ok ? res.json() : []
 }
 
@@ -50,7 +52,7 @@ const MyBookings = () => {
   // Cancel booking handler (PATCH: mark as cancelled)
   const handleCancelBooking = async (bookingId) => {
     setShowCancelModal({ show: false, booking: null })
-    const res = await fetch(`/api/bookings/${bookingId}/cancel`, { method: 'PATCH' })
+    const res = await fetch(`${API_URL}/api/bookings/${bookingId}/cancel`, { method: 'PATCH' })
     if (res.ok) {
       setBookings(bookings => bookings.map(b =>
         b._id === bookingId ? { ...b, status: 'cancelled' } : b

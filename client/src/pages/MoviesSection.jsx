@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Star, Calendar, Clock, Play, ChevronDown, Sparkles } from 'lucide-react'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 // Format price as ₱ and always show two decimals, always numeric
 const formatPrice = (price) => {
   if (typeof price === "string") {
@@ -18,7 +20,7 @@ const MoviesSection = () => {
 
   useEffect(() => {
     // Fetch only active/scheduled-and-now-live movies for users
-    fetch('/api/movies/active')
+    fetch(`${API_URL}/api/movies/active`)
       .then(res => res.json())
       .then(data => setMovies(data))
   }, [])

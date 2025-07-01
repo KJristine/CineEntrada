@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Film, Star, Calendar, Clock, Trash2, Edit, PlusCircle, ChevronRight, Clock as ClockIcon } from 'lucide-react'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const ListMovies = () => {
   const [movies, setMovies] = useState([])
   const [loading, setLoading] = useState(true)
@@ -67,7 +69,7 @@ const ListMovies = () => {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('/api/movies')
+      const res = await fetch(`${API_URL}/api/movies`)
       const data = await res.json()
       setMovies(data)
     } catch {
@@ -82,7 +84,7 @@ const ListMovies = () => {
     setError('')
     setSuccess('')
     try {
-      const res = await fetch(`/api/movies/${id}`, { method: 'DELETE' })
+      const res = await fetch(`${API_URL}/api/movies/${id}`, { method: 'DELETE' })
       if (res.ok) {
         setSuccess('Movie deleted!')
         setMovies(movies.filter(m => m._id !== id))

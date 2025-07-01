@@ -185,6 +185,17 @@ const Navbar = () => {
               className='absolute top-8 right-8 w-7 h-7 cursor-pointer'
               onClick={() => setIsOpen(false)}
             />
+            {/* Search Icon for mobile menu */}
+            <button
+              className="flex items-center gap-2 text-lg font-medium hover:text-red-400 transition-colors"
+              onClick={() => {
+                openSearchModal()
+                setIsOpen(false)
+              }}
+            >
+              <SearchIcon className="w-6 h-6" />
+              <span>Search</span>
+            </button>
             <Link
               onClick={() => {
                 smoothScrollToTop()
