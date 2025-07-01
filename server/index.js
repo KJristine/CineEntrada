@@ -25,6 +25,8 @@ mongoose.connect(process.env.MONGODB_URI)
 // Create booking with seat occupation check and price/total calculation
 app.post("/api/bookings", async (req, res) => {
   try {
+    console.log("Booking request body:", req.body); // Debug log
+
     const { movie, theater, date, time, seats, price } = req.body
 
     // Check if any of the requested seats are already booked for this show
@@ -72,6 +74,7 @@ app.post("/api/bookings", async (req, res) => {
     await booking.save()
     res.status(201).json({ success: true, booking })
   } catch (err) {
+    console.error("Booking error:", err); // Debug log
     res.status(500).json({ success: false, error: err.message })
   }
 })
