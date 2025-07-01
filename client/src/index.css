@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import "tailwindcss";
+
+* {
+
+  font-family: "Poppins", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: red transparent;
+
+}
+
+body {
+
+  color: white;
+  background-color: #000000;
+
+}
+
+/* Footer Aniamtions */
+
+@keyframes etherealRise {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.8) rotate(-10deg);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.05) rotate(2deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+    filter: blur(0px);
+  }
+}
+@keyframes etherealFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    filter: blur(5px);
+  }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes reverse-spin {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+@keyframes reverse-spin-slow {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+@keyframes spin-very-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg); 
+    opacity: 0.3;
+  }
+  25% { 
+    transform: translateY(-8px) translateX(4px) rotate(90deg); 
+    opacity: 0.8;
+  }
+  50% { 
+    transform: translateY(-12px) translateX(-2px) rotate(180deg); 
+    opacity: 1;
+  }
+  75% { 
+    transform: translateY(-6px) translateX(-4px) rotate(270deg); 
+    opacity: 0.6;
+  }
+}
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0; 
+    transform: scale(0.5) rotate(0deg); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2) rotate(180deg); 
+  }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+.animate-spin-slow { animation: spin-slow 4s linear infinite; }
+.animate-reverse-spin { animation: reverse-spin 3s linear infinite; }
+.animate-reverse-spin-slow { animation: reverse-spin-slow 6s linear infinite; }
+.animate-spin-very-slow { animation: spin-very-slow 8s linear infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-twinkle { animation: twinkle 2s ease-in-out infinite; }
+.animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+.animate-pulse-subtle { animation: pulse-subtle 2s ease-in-out infinite; }
+.bg-gradient-conic {
+  background: conic-gradient(var(--tw-gradient-stops));
+}
+.bg-gradient-radial {
+  background: radial-gradient(var(--tw-gradient-stops));
+}
+
+/* Movie Details Animation */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.6); }
+}
+.glow {
+  animation: glow 2s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* My Bookings Animation */
+
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97);}
+  to { opacity: 1; transform: scale(1);}
+}
+.animate-fadeIn {
+  animation: fadeIn 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* Booking List */
+
+/* Glow drop shadow for text */
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 8px #d946ef88);
+}
+
+/* Animated glowing text */
+.animate-glow {
+  animation: glowText 2.5s ease-in-out infinite alternate;
+}
+@keyframes glowText {
+  0% { text-shadow: 0 0 12px #f472b6, 0 0 32px #a78bfa; }
+  100% { text-shadow: 0 0 32px #f472b6, 0 0 64px #a78bfa; }
+}
+
+/* Enhanced mobile scrolling */
+@media (max-width: 1024px) {
+  .space-y-3 > * + * {
+    margin-top: 0.75rem;
+  }
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+}
+
+/* Smooth transitions for interactive elements */
+.transform {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Better text rendering on mobile */
+@media (max-width: 640px) {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@media (min-width: 1270px) and (max-width: 1290px) {
+  .list-movies-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .list-movies-grid > div {
+    max-width: 480px !important;
+    width: 100% !important;
+  }
+}
