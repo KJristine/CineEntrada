@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
@@ -5,8 +7,6 @@ const Booking = require("./models/Booking")
 const Movie = require('./models/Movie')
 const Stripe = require("stripe")
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-
-require('dotenv').config()
 
 const app = express()
 app.use(cors())
