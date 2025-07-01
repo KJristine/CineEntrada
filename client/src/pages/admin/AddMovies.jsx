@@ -609,56 +609,85 @@ const AddMovies = () => {
       </div>
       {/* Status Modal */}
       {showStatusModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-          <div className="bg-white rounded-xl p-8 z-10 max-w-md w-full shadow-2xl">
-            <h2 className="text-xl font-bold mb-4 text-gray-900">Set Movie Status</h2>
-            <div className="mb-4">
-              <label className="flex items-center mb-2">
-                <input
-                  type="radio"
-                  name="status"
-                  value="active"
-                  checked={statusChoice === 'active'}
-                  onChange={() => setStatusChoice('active')}
-                  className="mr-2"
-                />
-                <span className="text-gray-800">Active now</span>
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="status"
-                  value="scheduled"
-                  checked={statusChoice === 'scheduled'}
-                  onChange={() => setStatusChoice('scheduled')}
-                  className="mr-2"
-                />
-                <span className="text-gray-800">Schedule activation</span>
-              </label>
-              {statusChoice === 'scheduled' && (
-                <input
-                  type="datetime-local"
-                  value={scheduleDate}
-                  onChange={e => setScheduleDate(e.target.value)}
-                  className="mt-2 w-full border rounded px-2 py-1"
-                  required
-                />
-              )}
-            </div>
-            <div className="flex justify-end gap-2">
-              <button
-                className="px-4 py-2 rounded bg-gray-200"
-                onClick={() => setShowStatusModal(false)}
-              >Cancel</button>
-              <button
-                className="px-4 py-2 rounded bg-purple-600 text-white"
-                onClick={handleStatusConfirm}
-                disabled={statusChoice === 'scheduled' && !scheduleDate}
-              >Confirm</button>
-            </div>
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+        <div className="relative bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-900/90 border border-purple-400/20 rounded-3xl shadow-2xl p-8 max-w-md w-full animate-fadeIn">
+          {/* Close Button */}
+          <button
+            className="absolute top-4 right-4 text-purple-300 hover:text-white transition"
+            onClick={() => setShowStatusModal(false)}
+            aria-label="Close"
+          >
+            <svg width="24" height="24" fill="none" className="w-6 h-6">
+              <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+          <h2 className="text-2xl font-bold mb-4 text-white flex items-center gap-2">
+            <svg className="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24">
+              <path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+            </svg>
+            Set Movie Status
+          </h2>
+          <div className="mb-6">
+            <label className="flex items-center mb-3 cursor-pointer">
+              <input
+                type="radio"
+                name="status"
+                value="active"
+                checked={statusChoice === 'active'}
+                onChange={() => setStatusChoice('active')}
+                className="mr-3 accent-purple-500"
+              />
+              <span className="text-white font-medium">Active now</span>
+            </label>
+            <label className="flex items-center cursor-pointer">
+              <input
+                type="radio"
+                name="status"
+                value="scheduled"
+                checked={statusChoice === 'scheduled'}
+                onChange={() => setStatusChoice('scheduled')}
+                className="mr-3 accent-purple-500"
+              />
+              <span className="text-white font-medium">Schedule activation</span>
+            </label>
+            {statusChoice === 'scheduled' && (
+              <input
+                type="datetime-local"
+                value={scheduleDate}
+                onChange={e => setScheduleDate(e.target.value)}
+                className="mt-4 w-full border border-purple-400/30 rounded-lg px-3 py-2 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-purple-400"
+                required
+              />
+            )}
+          </div>
+          <div className="flex justify-end gap-2">
+            <button
+              className="px-5 py-2 rounded-lg bg-gray-700 text-gray-200 hover:bg-gray-600 transition"
+              onClick={() => setShowStatusModal(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="px-6 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold shadow hover:from-purple-600 hover:to-pink-600 transition"
+              onClick={handleStatusConfirm}
+              disabled={statusChoice === 'scheduled' && !scheduleDate}
+            >
+              Confirm
+            </button>
           </div>
         </div>
-      )}
+        <style>{`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.97);}
+            to { opacity: 1; transform: scale(1);}
+          }
+          .animate-fadeIn {
+            animation: fadeIn 0.3s cubic-bezier(.4,0,.2,1);
+          }
+        `}</style>
+      </div>
+    )}
       {/* Success Modal */}
       {showSuccessModal && (
         <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/70">
