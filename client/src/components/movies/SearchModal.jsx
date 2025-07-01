@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { SearchIcon, XIcon } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const SearchModal = ({ isOpen, onClose }) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
@@ -10,7 +12,7 @@ const SearchModal = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     // Only fetch movies that are active or scheduled and now live
-    fetch('/api/movies/active')
+    fetch(`${API_URL}/api/movies/active`)
       .then(res => res.json())
       .then(data => setMovies(data))
   }, [])

@@ -5,6 +5,8 @@ import BookingModal from '../bookings/BookingModal'
 import TrailerModal from './TrailerModal'
 import '../../index.css'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 // Helper to sort showtimes by time (e.g. "2:00 PM", "11:30 AM")
 const sortShowtimes = (showtimes) => {
   const parseTime = (timeStr) => {
@@ -37,7 +39,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetch(`/api/movies/${id}`)
+    fetch(`${API_URL}/api/movies/${id}`)
       .then(res => res.ok ? res.json() : null)
       .then(data => {
         setMovie(data)

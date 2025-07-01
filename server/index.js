@@ -240,7 +240,7 @@ app.delete('/api/movies/:id', async (req, res) => {
   }
 })
 
-// Set movie status or schedule activation
+// Set movie status or schedule activation (FIXED: 404 if not found)
 app.put('/api/movies/:id/status', async (req, res) => {
   try {
     const { isActive, scheduledAt } = req.body
@@ -252,6 +252,9 @@ app.put('/api/movies/:id/status', async (req, res) => {
       update,
       { new: true }
     )
+    if (!movie) {
+      return res.status(404).json({ error: 'Movie not found' })
+    }
     res.json(movie)
   } catch (err) {
     res.status(500).json({ error: 'Failed to update movie status.' })
