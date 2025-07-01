@@ -248,11 +248,11 @@ const TheatersSection = () => {
 
       {/* Booking Modal */}
       {bookingOpen && selectedTheater && (
-        <BookingModal
-          show={bookingOpen}
-          onClose={() => setBookingOpen(false)}
-          selectedTheater={selectedTheater.name}
-        />
+      <BookingModal
+        show={bookingOpen}
+        onClose={() => setBookingOpen(false)}
+        selectedTheater={selectedTheater.name}
+      />
       )}
     </section>
   )

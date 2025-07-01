@@ -190,19 +190,9 @@ const BookingModal = ({
   }, [selectedTheaterProp]);
 
   const movieObj = movies.find(m => m._id === selectedMovie);
-  const moviesInTheater = selectedTheater
-    ? movies.filter(movie =>
-        theatersData.find(
-          t => t.name === selectedTheater && t.movies && t.movies.includes(movie.title)
-        )
-      )
-    : movies;
+  const moviesInTheater = movies;
 
-  const theatersShowingMovie = selectedMovie
-    ? theatersData.filter(theater =>
-        theater.movies && movieObj && theater.movies.includes(movieObj.title)
-      )
-    : theatersData;
+  const theatersShowingMovie = theatersData;
 
   const selectedShowtimeObj = movieObj?.showtimes?.find(
     s => (typeof s === 'object' ? s.time === selectedTime : s === selectedTime)
@@ -340,9 +330,9 @@ const BookingModal = ({
                       }}
                     >
                       <option value="">Select a movie...</option>
-                      {moviesInTheater.map(movie => (
-                        <option key={movie._id} value={movie._id}>{movie.title}</option>
-                      ))}
+                      {movies.map(movie => (
+                          <option key={movie._id} value={movie._id}>{movie.title}</option>
+                        ))}
                     </select>
                   </div>
                   <div>
