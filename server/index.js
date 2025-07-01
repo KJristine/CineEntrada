@@ -9,7 +9,13 @@ const Stripe = require("stripe")
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const app = express()
-app.use(cors())
+
+// --- CORS CONFIGURATION: Allow Vercel frontend ---
+app.use(cors({
+  origin: 'https://cine-entrada.vercel.app',
+  credentials: true
+}))
+
 app.use(express.json())
 
 mongoose.connect(process.env.MONGODB_URI)
