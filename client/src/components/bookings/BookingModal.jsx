@@ -211,7 +211,7 @@ const BookingModal = ({
         return;
       }
       try {
-        const res = await fetch('/api/bookings');
+        const res = await fetch(`${API_URL}/api/bookings`);
         const bookings = await res.json();
         const showBookings = bookings.filter(
           b =>
@@ -252,7 +252,7 @@ const BookingModal = ({
       (showPayment && !isSmallScreen && selectedSeats.length > 0 && ticketPrice) ||
       (isSmallScreen && step === 2 && selectedSeats.length > 0 && ticketPrice)
     ) {
-      fetch('/api/create-payment-intent', {
+      fetch(`${API_URL}/api/create-payment-intent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: selectedSeats.length * ticketPrice * 100 }),
@@ -717,7 +717,7 @@ const BookingModal = ({
                               createdAt: new Date().toISOString(),
                             };
                             try {
-                              const res = await fetch('/api/bookings', {
+                              const res = await fetch(`${API_URL}/api/bookings`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify(booking),
