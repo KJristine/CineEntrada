@@ -37,6 +37,11 @@ const MovieDetails = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false)
   const [loading, setLoading] = useState(true)
 
+  // Scroll to top when movie changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [id]);
+
   useEffect(() => {
     setLoading(true)
     fetch(`${API_URL}/api/movies/${id}`)
@@ -159,7 +164,6 @@ const MovieDetails = () => {
                       <Users className='w-4 h-4' />
                       <span className='font-medium'>PG-13</span>
                     </div>
-                    {/* Show badges on mobile only, but move below on xs */}
                   </div>
                   {/* Badges row for mobile: move below on screens <450px */}
                   <div className="flex flex-wrap gap-2 mt-2
