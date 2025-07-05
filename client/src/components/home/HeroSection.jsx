@@ -10,13 +10,19 @@ const HeroSection = () => {
   const [currentMovie, setCurrentMovie] = useState(0)
   const [isLoaded, setIsLoaded] = useState(true)
   const [isTrailerOpen, setIsTrailerOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
   // Fetch only active/scheduled-and-now-live movies for users
   useEffect(() => {
+    setLoading(true)
     fetch(`${API_URL}/api/movies/active`)
       .then(res => res.json())
-      .then(data => setMovies(data))
+      .then(data => {
+        setMovies(data)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
   }, [])
 
   // Clean auto-slide functionality
@@ -32,7 +38,15 @@ const HeroSection = () => {
     return () => clearInterval(interval)
   }, [movies])
 
-  if (movies.length === 0) return <EmptyHero />
+  if (!loading && movies.length === 0) return <EmptyHero />
+  if (loading || movies.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
+        <span className="text-2xl animate-pulse">Loading movies...</span>
+      </div>
+    )
+  }
+
   const currentMovieData = movies[currentMovie]
 
   // Balanced title sizing - prevents cut-off while maintaining readability

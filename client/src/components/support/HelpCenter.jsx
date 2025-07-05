@@ -35,12 +35,14 @@ const HelpCenter = () => {
     <div className="space-y-8">
       {/* Search Bar */}
       <div className="relative">
-        <div className="flex items-center bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-blue-500/50 transition-all duration-300">
-          <Search className="w-5 h-5 text-gray-400 mr-4" />
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-blue-500/50 transition-all duration-300 gap-3 sm:gap-0">
+          <div className="flex items-center">
+            <Search className="w-5 h-5 text-gray-400 mr-4" />
+          </div>
           <input
             type="text"
             placeholder="Search for help..."
-            className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none"
+            className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none mb-2 sm:mb-0"
             disabled
           />
           <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300" disabled>
@@ -50,7 +52,7 @@ const HelpCenter = () => {
       </div>
 
       {/* FAQ Categories */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {[
           { icon: BookOpen, title: "Getting Started", desc: "New to MovieByte? Start here!" },
           { icon: Headphones, title: "Booking Help", desc: "Issues with reservations?" },
@@ -106,9 +108,9 @@ const HelpCenter = () => {
       </div>
 
       {/* Contact Options */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
         <button
-          className="relative p-4 bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-xl opacity-60 cursor-not-allowed"
+          className="relative p-4 bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-xl opacity-60 cursor-not-allowed w-full"
           disabled
         >
           <MessageCircle className="w-6 h-6 text-green-400 mx-auto mb-2" />
@@ -116,7 +118,7 @@ const HelpCenter = () => {
           <span className="absolute top-2 right-2 text-xs bg-gray-600 px-2 py-1 rounded-full">Coming Soon</span>
         </button>
         <button
-          className="relative p-4 bg-gradient-to-r from-blue-500/20 to-cyan-600/20 border border-blue-500/30 rounded-xl opacity-60 cursor-not-allowed"
+          className="relative p-4 bg-gradient-to-r from-blue-500/20 to-cyan-600/20 border border-blue-500/30 rounded-xl opacity-60 cursor-not-allowed w-full"
           disabled
         >
           <Mail className="w-6 h-6 text-blue-400 mx-auto mb-2" />
@@ -124,7 +126,7 @@ const HelpCenter = () => {
           <span className="absolute top-2 right-2 text-xs bg-gray-600 px-2 py-1 rounded-full">Coming Soon</span>
         </button>
         <button
-          className="relative p-4 bg-gradient-to-r from-purple-500/20 to-pink-600/20 border border-purple-500/30 rounded-xl opacity-60 cursor-not-allowed"
+          className="relative p-4 bg-gradient-to-r from-purple-500/20 to-pink-600/20 border border-purple-500/30 rounded-xl opacity-60 cursor-not-allowed w-full"
           disabled
         >
           <Phone className="w-6 h-6 text-purple-400 mx-auto mb-2" />

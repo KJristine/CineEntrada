@@ -5,7 +5,7 @@ const SupportModal = ({ isOpen, onClose, children, title, icon: Icon }) => {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-black/80 backdrop-blur-xl">
         {/* Floating Particles */}
@@ -28,47 +28,47 @@ const SupportModal = ({ isOpen, onClose, children, title, icon: Icon }) => {
         
         {/* Aurora Effects */}
         <div className="absolute top-0 left-0 w-full h-full opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/40 via-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-pink-500/40 via-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/4 left-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-gradient-radial from-blue-500/40 via-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-60 h-60 sm:w-80 sm:h-80 bg-gradient-radial from-pink-500/40 via-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
       </div>
 
       {/* Modal Content */}
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden">
+      <div className="relative w-full max-w-lg sm:max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-hidden">
         {/* Glass Container */}
-        <div className="bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-900/90 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl">
+        <div className="bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-900/90 backdrop-blur-2xl border border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl">
           {/* Header */}
-          <div className="relative p-8 border-b border-white/10">
+          <div className="relative p-4 sm:p-8 border-b border-white/10">
             {/* Header Background Effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 rounded-t-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 rounded-t-2xl sm:rounded-t-3xl"></div>
             
-            <div className="relative flex items-center justify-between">
+            <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center space-x-4">
-                <div className="p-3 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl border border-blue-500/30">
-                  <Icon className="w-8 h-8 text-blue-400" />
+                <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl border border-blue-500/30">
+                  <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-blue-400" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
+                  <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
                     {title}
                   </h2>
                   <div className="flex items-center space-x-2 mt-2">
                     <Sparkles className="w-4 h-4 text-yellow-400 animate-spin" />
-                    <span className="text-blue-300 text-sm font-medium">Premium Support Experience</span>
+                    <span className="text-blue-300 text-xs sm:text-sm font-medium">Premium Support Experience</span>
                   </div>
                 </div>
               </div>
               
               <button
                 onClick={onClose}
-                className="p-3 hover:bg-white/10 rounded-2xl transition-all duration-300 transform hover:scale-110 group"
+                className="p-2 sm:p-3 hover:bg-white/10 rounded-2xl transition-all duration-300 transform hover:scale-110 group self-start sm:self-auto"
               >
-                <X className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 group-hover:text-white transition-colors" />
               </button>
             </div>
           </div>
 
           {/* Content */}
-          <div className="p-8 max-h-[60vh] overflow-y-auto custom-scrollbar">
+          <div className="p-4 sm:p-8 max-h-[60vh] overflow-y-auto custom-scrollbar">
             {children}
           </div>
         </div>

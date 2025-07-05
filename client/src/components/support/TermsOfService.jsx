@@ -20,7 +20,7 @@ const TermsOfService = () => {
   return (
     <div className="space-y-6">
       {/* Table of Contents */}
-      <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10 rounded-2xl p-6">
+      <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10 rounded-2xl p-4 sm:p-6">
         <h3 className="text-white font-semibold mb-4 flex items-center space-x-2">
           <BookOpen className="w-5 h-5 text-blue-400" />
           <span>Table of Contents</span>
@@ -31,7 +31,7 @@ const TermsOfService = () => {
               {col1.map((item, index) => (
                 <button
                   key={index}
-                  className="text-left text-blue-300 hover:text-blue-200 transition-colors p-2 rounded-lg hover:bg-white/5"
+                  className="text-left text-blue-300 hover:text-blue-200 transition-colors p-2 rounded-lg hover:bg-white/5 w-full"
                 >
                   {item}
                 </button>
@@ -41,7 +41,7 @@ const TermsOfService = () => {
               {col2.map((item, index) => (
                 <button
                   key={index + mid}
-                  className="text-left text-blue-300 hover:text-blue-200 transition-colors p-2 rounded-lg hover:bg-white/5"
+                  className="text-left text-blue-300 hover:text-blue-200 transition-colors p-2 rounded-lg hover:bg-white/5 w-full"
                 >
                   {item}
                 </button>

@@ -44,13 +44,13 @@ const ContactSupport = () => {
   return (
     <div className="space-y-8">
       {/* Support Options */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {supportOptions.map((option, index) => (
           <div key={index} className="group relative overflow-hidden">
-            <div className={`p-6 bg-gradient-to-br from-gray-500/10 to-gray-600/5 border border-gray-500/20 rounded-2xl transition-all duration-500 cursor-not-allowed`}>
+            <div className={`p-6 bg-gradient-to-br from-gray-500/10 to-gray-600/5 border border-gray-500/20 rounded-2xl transition-all duration-500 cursor-not-allowed h-full flex flex-col`}>
               {/* Background Glow Effect */}
               <div className={`absolute inset-0 bg-gradient-to-r ${option.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}></div>
-              <div className="relative">
+              <div className="relative flex-1 flex flex-col">
                 <div className={`inline-flex p-4 bg-gradient-to-r ${option.gradient} bg-opacity-20 rounded-2xl mb-4`}>
                   <option.icon className="w-8 h-8 text-gray-500" />
                 </div>
@@ -58,12 +58,12 @@ const ContactSupport = () => {
                   {option.title}
                   <span className="ml-2 text-xs bg-gray-600 px-2 py-1 rounded-full">Coming Soon</span>
                 </h3>
-                <p className="mb-6 text-gray-500">
+                <p className="mb-6 text-gray-500 flex-1">
                   {option.desc}
                 </p>
                 <button 
                   disabled
-                  className="w-full py-3 px-6 rounded-xl font-semibold bg-gray-600 cursor-not-allowed text-gray-400"
+                  className="w-full py-3 px-6 rounded-xl font-semibold bg-gray-600 cursor-not-allowed text-gray-400 mt-auto"
                 >
                   {option.action}
                 </button>
@@ -80,14 +80,14 @@ const ContactSupport = () => {
           <span>Quick Actions</span>
           <span className="ml-2 text-xs bg-gray-600 px-2 py-1 rounded-full text-gray-200">Coming Soon</span>
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             "Report Bug",
             "Feature Request", 
             "Billing Issue",
             "Account Help"
           ].map((action, index) => (
-            <button key={index} className="p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 text-gray-300 hover:text-white text-sm">
+            <button key={index} className="p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 text-gray-300 hover:text-white text-sm w-full">
               {action}
             </button>
           ))}

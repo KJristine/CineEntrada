@@ -5,9 +5,9 @@ const PrivacyPolicy = () => {
   return (
     <div className="space-y-6">
       {/* Privacy Overview */}
-      <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-white/10 rounded-2xl p-6">
-        <div className="flex items-start space-x-4">
-          <div className="p-3 bg-green-500/20 rounded-xl">
+      <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-white/10 rounded-2xl p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4">
+          <div className="p-3 bg-green-500/20 rounded-xl flex-shrink-0 mb-2 sm:mb-0">
             <Shield className="w-8 h-8 text-green-400" />
           </div>
           <div>
@@ -26,7 +26,7 @@ const PrivacyPolicy = () => {
             <Search className="w-6 h-6 text-blue-400" />
             <span>Information We Collect</span>
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { title: "Personal Data", items: ["Name", "Email", "Phone", "Date of Birth"] },
               { title: "Payment Info", items: ["Credit Card", "Billing Address", "Transaction History"] },
@@ -52,7 +52,7 @@ const PrivacyPolicy = () => {
             <Lock className="w-6 h-6 text-green-400" />
             <span>How We Protect Your Data</span>
           </h3>
-          <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6">
+          <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 sm:p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 className="text-white font-medium mb-3">Security Measures</h4>
@@ -79,7 +79,7 @@ const PrivacyPolicy = () => {
 
       <div className="text-center pt-6 border-t border-white/10">
         <p className="text-gray-400 text-sm">
-          Questions about privacy? Contact us at <span className="text-blue-400">privacy@cine-entrada.ph</span>
+          Questions about privacy? Contact us at <span className="text-blue-400 break-all">privacy@cine-entrada.ph</span>
         </p>
       </div>
     </div>
