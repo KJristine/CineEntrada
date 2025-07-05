@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Star, Calendar, Clock, Play, ChevronDown, Sparkles } from 'lucide-react'
+import EmptyHero from '../components/home/EmptyHero'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -17,12 +18,18 @@ const MoviesSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [isVisible, setIsVisible] = useState(false)
   const [showAll, setShowAll] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
     // Fetch only active/scheduled-and-now-live movies for users
     fetch(`${API_URL}/api/movies/active`)
       .then(res => res.json())
-      .then(data => setMovies(data))
+      .then(data => {
+        setMovies(data)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
   }, [])
 
   useEffect(() => {
@@ -149,131 +156,134 @@ const MoviesSection = () => {
         </div>
 
         {/* Movies Grid */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16 transition-all duration-1000 delay-500 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          {moviesToShow.map((movie) => (
-            <Link
-              key={movie._id}
-              to={`/movie/${movie._id}`}
-              className='group bg-gray-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-red-500/20 transition-all duration-500 hover:scale-105 block'
-            >
-              {/* Movie Poster */}
-              <div className='relative aspect-[3/4] overflow-hidden'>
-                <img
-                  src={movie.poster || movie.image}
-                  alt={movie.title}
-                  className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
-                />
-                
-                {/* Simple Overlay */}
-                <div className='absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
-                  <div className='bg-red-600 text-white p-3 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-300'>
-                    <Play className='w-6 h-6 ml-0.5' fill='currentColor' />
+        {!loading && moviesToShow.length === 0 && <EmptyHero />}
+        {moviesToShow.length > 0 && (
+          <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16 transition-all duration-1000 delay-500 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            {moviesToShow.map((movie) => (
+              <Link
+                key={movie._id}
+                to={`/movie/${movie._id}`}
+                className='group bg-gray-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-red-500/20 transition-all duration-500 hover:scale-105 block'
+              >
+                {/* Movie Poster */}
+                <div className='relative aspect-[3/4] overflow-hidden'>
+                  <img
+                    src={movie.poster || movie.image}
+                    alt={movie.title}
+                    className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
+                  />
+                  
+                  {/* Simple Overlay */}
+                  <div className='absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
+                    <div className='bg-red-600 text-white p-3 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-300'>
+                      <Play className='w-6 h-6 ml-0.5' fill='currentColor' />
+                    </div>
                   </div>
-                </div>
 
-                {/* Studio Badge */}
-                {movie.studio && (
-                  <div className='absolute top-3 left-3'>
-                    <span className='bg-red-600 text-white px-2 py-1 text-xs font-bold uppercase rounded'>
-                      {movie.studio}
-                    </span>
-                  </div>
-                )}
-
-                {/* Rating Badge */}
-                <div className='absolute top-3 right-3'>
-                  <div className='flex items-center space-x-1 bg-black/70 px-2 py-1 rounded'>
-                    <Star className='w-3 h-3 text-yellow-400' fill='currentColor' />
-                    <span className='text-white text-xs font-bold'>
-                      {movie.rating ? movie.rating : '8.5'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* New Badge */}
-                {parseInt(movie.year) >= 2022 && (
-                  <div className='absolute bottom-3 left-3'>
-                    <span className='bg-green-500 text-white px-2 py-1 text-xs font-bold uppercase rounded animate-pulse'>
-                      NEW
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Movie Info */}
-              <div className='p-4 space-y-3'>
-                <h3 className='text-lg font-bold leading-tight group-hover:text-red-400 transition-colors line-clamp-2'>
-                  {movie.title}
-                </h3>
-
-                {/* Movie Meta */}
-                <div className='flex items-center justify-between text-gray-400 text-xs'>
-                  <div className='flex items-center space-x-1'>
-                    <Calendar className='w-3 h-3' />
-                    <span>{movie.year}</span>
-                  </div>
-                  <div className='flex items-center space-x-1'>
-                    <Clock className='w-3 h-3' />
-                    <span>{movie.duration}</span>
-                  </div>
-                </div>
-
-                {/* Genre Tags */}
-                <div className='flex flex-wrap gap-1'>
-                  {movie.genre &&
-                    movie.genre.split(' | ').slice(0, 2).map((genre, index) => (
-                      <span
-                        key={index}
-                        className='bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded'
-                      >
-                        {genre}
+                  {/* Studio Badge */}
+                  {movie.studio && (
+                    <div className='absolute top-3 left-3'>
+                      <span className='bg-red-600 text-white px-2 py-1 text-xs font-bold uppercase rounded'>
+                        {movie.studio}
                       </span>
-                    ))}
+                    </div>
+                  )}
+
+                  {/* Rating Badge */}
+                  <div className='absolute top-3 right-3'>
+                    <div className='flex items-center space-x-1 bg-black/70 px-2 py-1 rounded'>
+                      <Star className='w-3 h-3 text-yellow-400' fill='currentColor' />
+                      <span className='text-white text-xs font-bold'>
+                        {movie.rating ? movie.rating : '8.5'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* New Badge */}
+                  {parseInt(movie.year) >= 2022 && (
+                    <div className='absolute bottom-3 left-3'>
+                      <span className='bg-green-500 text-white px-2 py-1 text-xs font-bold uppercase rounded animate-pulse'>
+                        NEW
+                      </span>
+                    </div>
+                  )}
                 </div>
 
-                {/* Description */}
-                <p className='text-gray-400 text-xs leading-relaxed line-clamp-2'>
-                  {movie.description}
-                </p>
+                {/* Movie Info */}
+                <div className='p-4 space-y-3'>
+                  <h3 className='text-lg font-bold leading-tight group-hover:text-red-400 transition-colors line-clamp-2'>
+                    {movie.title}
+                  </h3>
 
-                {/* CTA and Price */}
-                <div className='flex items-center justify-between pt-2 border-t border-gray-700/50'>
-                  <div className='text-red-400 text-xs font-semibold group-hover:text-red-300 transition-colors'>
-                    View Details →
+                  {/* Movie Meta */}
+                  <div className='flex items-center justify-between text-gray-400 text-xs'>
+                    <div className='flex items-center space-x-1'>
+                      <Calendar className='w-3 h-3' />
+                      <span>{movie.year}</span>
+                    </div>
+                    <div className='flex items-center space-x-1'>
+                      <Clock className='w-3 h-3' />
+                      <span>{movie.duration}</span>
+                    </div>
                   </div>
-                  <div className='flex items-center space-x-1 text-yellow-400'>
-                    <Star className='w-3 h-3' fill='currentColor' />
-                    <span className='text-xs font-bold'>
-                      {movie.rating ? movie.rating : '8.5'}
-                    </span>
+
+                  {/* Genre Tags */}
+                  <div className='flex flex-wrap gap-1'>
+                    {movie.genre &&
+                      movie.genre.split(' | ').slice(0, 2).map((genre, index) => (
+                        <span
+                          key={index}
+                          className='bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded'
+                        >
+                          {genre}
+                        </span>
+                      ))}
                   </div>
+
+                  {/* Description */}
+                  <p className='text-gray-400 text-xs leading-relaxed line-clamp-2'>
+                    {movie.description}
+                  </p>
+
+                  {/* CTA and Price */}
+                  <div className='flex items-center justify-between pt-2 border-t border-gray-700/50'>
+                    <div className='text-red-400 text-xs font-semibold group-hover:text-red-300 transition-colors'>
+                      View Details →
+                    </div>
+                    <div className='flex items-center space-x-1 text-yellow-400'>
+                      <Star className='w-3 h-3' fill='currentColor' />
+                      <span className='text-xs font-bold'>
+                        {movie.rating ? movie.rating : '8.5'}
+                      </span>
+                    </div>
+                  </div>
+                  {/* Show price if available */}
+                  {Array.isArray(movie.showtimes) && movie.showtimes.length > 0 && (
+                    <div className="pt-2 text-xs text-green-400 font-bold">
+                      {(() => {
+                        // Find minimum price among showtimes
+                        const minPrice = Math.min(
+                          ...movie.showtimes
+                            .filter(st => st && st.price !== undefined)
+                            .map(st =>
+                              typeof st.price === "string"
+                                ? Number(st.price.replace(/[^\d.]/g, ""))
+                                : Number(st.price)
+                            )
+                        )
+                        return isFinite(minPrice)
+                          ? `From ${formatPrice(minPrice)}`
+                          : ''
+                      })()}
+                    </div>
+                  )}
                 </div>
-                {/* Show price if available */}
-                {Array.isArray(movie.showtimes) && movie.showtimes.length > 0 && (
-                  <div className="pt-2 text-xs text-green-400 font-bold">
-                    {(() => {
-                      // Find minimum price among showtimes
-                      const minPrice = Math.min(
-                        ...movie.showtimes
-                          .filter(st => st && st.price !== undefined)
-                          .map(st =>
-                            typeof st.price === "string"
-                              ? Number(st.price.replace(/[^\d.]/g, ""))
-                              : Number(st.price)
-                          )
-                      )
-                      return isFinite(minPrice)
-                        ? `From ${formatPrice(minPrice)}`
-                        : ''
-                    })()}
-                  </div>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
 
         {/* Show More/Less Button */}
         {filteredMovies.length > 8 && (
