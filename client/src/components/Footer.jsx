@@ -101,7 +101,7 @@ const Footer = () => {
     { label: 'Home', href: '#' },
     { label: 'Movies', href: '#movies' },
     { label: 'Theaters', href: '#theaters' },
-    { label: 'My Bookings', href: '#bookings' }
+    { label: 'My Bookings', href: '/my-bookings' }
   ]
 
   const supportLinks = [

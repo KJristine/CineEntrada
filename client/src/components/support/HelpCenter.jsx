@@ -35,14 +35,12 @@ const HelpCenter = () => {
     <div className="space-y-8">
       {/* Search Bar */}
       <div className="relative">
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-blue-500/50 transition-all duration-300 gap-3 sm:gap-0">
-          <div className="flex items-center">
-            <Search className="w-5 h-5 text-gray-400 mr-4" />
-          </div>
+        <div className="flex items-center bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-blue-500/50 transition-all duration-300 gap-3">
+          <Search className="hidden sm:block w-6 h-6 text-gray-400 mr-2" />
           <input
             type="text"
             placeholder="Search for help..."
-            className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none mb-2 sm:mb-0"
+            className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none"
             disabled
           />
           <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300" disabled>
@@ -62,7 +60,7 @@ const HelpCenter = () => {
           <div key={index} className="group p-6 bg-gradient-to-br from-white/5 to-white/10 border border-white/10 rounded-2xl hover:border-blue-500/30 transition-all duration-300 cursor-not-allowed opacity-60">
             <div className="flex items-start space-x-4">
               <div className="p-3 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-xl group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-300">
-                <category.icon className="w-6 h-6 text-blue-400" />
+                <category.icon className="w-8 h-8 text-blue-400" />
               </div>
               <div>
                 <h3 className="text-white font-semibold mb-2 group-hover:text-blue-300 transition-colors">
@@ -85,9 +83,7 @@ const HelpCenter = () => {
         {faqData.map((item, idx) => (
           <div
             key={idx}
-            className={`p-4 bg-gradient-to-r from-white/5 to-white/10 border border-white/10 rounded-xl transition-all duration-300 ${
-              openIndex === idx ? 'cursor-pointer' : 'cursor-pointer'
-            }`}
+            className={`p-4 bg-gradient-to-r from-white/5 to-white/10 border border-white/10 rounded-xl transition-all duration-300 cursor-pointer`}
             onClick={() => handleToggle(idx)}
           >
             <div className="flex items-center justify-between">

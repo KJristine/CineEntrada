@@ -16,6 +16,12 @@ body {
 
 }
 
+html {
+
+  scroll-behavior: smooth;
+
+}
+
 /* Footer Aniamtions */
 
 @keyframes etherealRise {

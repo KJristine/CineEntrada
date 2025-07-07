@@ -42,6 +42,16 @@ const SupportModal = ({ isOpen, onClose, children, title, icon: Icon }) => {
             {/* Header Background Effects */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 rounded-t-2xl sm:rounded-t-3xl"></div>
             
+            {/* Close button absolutely at top right of header */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-2 sm:p-3 hover:bg-white/10 rounded-2xl transition-all duration-300 transform hover:scale-110 group"
+              style={{ zIndex: 10 }}
+              aria-label="Close"
+            >
+              <X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 group-hover:text-white transition-colors" />
+            </button>
+
             <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center space-x-4">
                 <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl border border-blue-500/30">
@@ -51,19 +61,14 @@ const SupportModal = ({ isOpen, onClose, children, title, icon: Icon }) => {
                   <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
                     {title}
                   </h2>
-                  <div className="flex items-center space-x-2 mt-2">
-                    <Sparkles className="w-4 h-4 text-yellow-400 animate-spin" />
-                    <span className="text-blue-300 text-xs sm:text-sm font-medium">Premium Support Experience</span>
-                  </div>
+                  {title === "Help Center" && (
+                    <div className="flex items-center space-x-2 mt-2">
+                      <Sparkles className="w-4 h-4 text-yellow-400 animate-spin" />
+                      <span className="text-blue-300 text-xs sm:text-sm font-medium">Premium Support Experience</span>
+                    </div>
+                  )}
                 </div>
               </div>
-              
-              <button
-                onClick={onClose}
-                className="p-2 sm:p-3 hover:bg-white/10 rounded-2xl transition-all duration-300 transform hover:scale-110 group self-start sm:self-auto"
-              >
-                <X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 group-hover:text-white transition-colors" />
-              </button>
             </div>
           </div>
 
