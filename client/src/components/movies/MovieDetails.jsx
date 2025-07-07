@@ -39,7 +39,7 @@ const MovieDetails = () => {
 
   // Scroll to top when movie changes
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [id]);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const MovieDetails = () => {
     <>
       <div className='min-h-screen bg-gray-950 text-white overflow-hidden'>
         {/* Background and overlays */}
-        <div className='relative min-h-screen flex flex-col justify-start overflow-hidden'>
+        <div className='relative min-h-screen flex items-center overflow-hidden'>
           <div
             className='absolute inset-0 scale-105 transition-transform duration-1000'
             style={{
